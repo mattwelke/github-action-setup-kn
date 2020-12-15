@@ -1,0 +1,13 @@
+name: "setup-kn"
+
+description: "Installs the kn CLI tool."
+
+inputs:
+  version:
+    description: "The version of kn to install. Ex: v0.19.1"
+    required: true
+    default: "v0.19.1"
+
+runs:
+  using: "node12"
+  main: "dist/index.js"

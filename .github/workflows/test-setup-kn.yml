@@ -1,0 +1,66 @@
+name: JS Actions
+
+on:
+  pull-request:
+    types: [labeled]
+
+jobs:
+  test-happy-path:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: setup-kn
+        uses: ./.github/actions/setup-kn
+
+      - name: Test command
+        run: kn version
+
+  test-specify-valid-version:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: setup-kn
+        uses: ./.github/actions/setup-kn
+        with:
+          version: v0.19.0
+
+      - name: Test command
+        run: kn version
+
+  test-specify-invalid-version:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: setup-kn
+        uses: ./.github/actions/setup-kn
+        with:
+          version: "0.19.0"
+
+      - name: Test command
+        run: kn version
+
+  test-already-installed:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: setup-kn
+        uses: ./.github/actions/setup-kn
+        with:
+          version: "v0.19.0"
+
+      - name: Test command
+        run: kn version
+
+      - name: setup-kn
+        uses: ./.github/actions/setup-kn
+
+      - name: Test command
+        run: kn version

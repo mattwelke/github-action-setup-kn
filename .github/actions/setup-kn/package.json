@@ -1,0 +1,28 @@
+{
+  "name": "github-action-setup-kn",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "ncc build src/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mattwelke/github-action-setup-kn.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/mattwelke/github-action-setup-kn/issues"
+  },
+  "homepage": "https://github.com/mattwelke/github-action-setup-kn#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.6",
+    "@actions/tool-cache": "^1.6.1",
+    "@lifeomic/attempt": "^3.0.0"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.25.1"
+  }
+}
