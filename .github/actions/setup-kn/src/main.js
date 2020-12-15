@@ -1,7 +1,3 @@
-/**
- * Inspired by https://github.com/google-github-actions/setup-gcloud
- */
-
 import {
     addPath,
     debug,
@@ -9,6 +5,7 @@ import {
 } from '@actions/core';
 import {
     cacheDir,
+    cacheFile,
     downloadTool,
     find,
     findAllVersions,
@@ -29,19 +26,6 @@ function isInstalled(version) {
         toolPath = findAllVersions('kn');
         return toolPath.length > 0;
     }
-}
-
-/**
- * Installs the downloaded kn tool.
- * @param {string} version The version being installed.
- * @param {*} downloadPath The download path for the tool.
- */
-async function install(version, downloadPath) {
-    const toolRoot = downloadPath;
-
-    let toolPath = await cacheDir(toolRoot, 'kn', version);
-
-    addPath(toolPath);
 }
 
 async function run() {
@@ -66,7 +50,9 @@ async function run() {
         maxAttempts: 4,
     });
 
-    await install(knVersion, downloadPath);
+    const toolDestFolder = await cacheFile(downloadPath, 'kn', 'kn', knVersion);
+
+    addPath(toolDestFolder);
 
     debug(`kn ${knVersion} installed.`);
 }

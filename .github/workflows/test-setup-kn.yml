@@ -1,4 +1,4 @@
-name: JS Actions
+name: Testing setup-kn action
 
 on:
   workflow_dispatch:
