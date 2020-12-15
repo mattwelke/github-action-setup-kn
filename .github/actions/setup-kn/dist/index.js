@@ -5093,10 +5093,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_tool_cache__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(784);
 /* harmony import */ var _actions_tool_cache__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_actions_tool_cache__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _lifeomic_attempt__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(449);
-/**
- * Inspired by https://github.com/google-github-actions/setup-gcloud
- */
-
 
 
 
@@ -5115,19 +5111,6 @@ function isInstalled(version) {
         toolPath = (0,_actions_tool_cache__WEBPACK_IMPORTED_MODULE_1__.findAllVersions)('kn');
         return toolPath.length > 0;
     }
-}
-
-/**
- * Installs the downloaded kn tool.
- * @param {string} version The version being installed.
- * @param {*} downloadPath The download path for the tool.
- */
-async function install(version, downloadPath) {
-    const toolRoot = downloadPath;
-
-    let toolPath = await (0,_actions_tool_cache__WEBPACK_IMPORTED_MODULE_1__.cacheDir)(toolRoot, 'kn', version);
-
-    (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.addPath)(toolPath);
 }
 
 async function run() {
@@ -5152,7 +5135,9 @@ async function run() {
         maxAttempts: 4,
     });
 
-    await install(knVersion, downloadPath);
+    const toolDestFolder = await (0,_actions_tool_cache__WEBPACK_IMPORTED_MODULE_1__.cacheFile)(downloadPath, 'kn', 'kn', knVersion);
+
+    (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.addPath)(toolDestFolder);
 
     (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.debug)(`kn ${knVersion} installed.`);
 }
