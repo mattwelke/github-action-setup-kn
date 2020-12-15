@@ -1,8 +1,7 @@
 name: JS Actions
 
 on:
-  issue:
-    types: [labeled]
+  workflow_dispatch:
 
 jobs:
   test-happy-path:
