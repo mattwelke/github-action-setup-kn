@@ -1,10 +1,11 @@
+import { chmod } from 'fs/promises';
+
 import {
     addPath,
     debug,
     getInput,
 } from '@actions/core';
 import {
-    cacheDir,
     cacheFile,
     downloadTool,
     find,
@@ -49,6 +50,8 @@ async function run() {
         factor: 2,
         maxAttempts: 4,
     });
+
+    await chmod(downloadPath, '+x');
 
     const toolDestFolder = await cacheFile(downloadPath, 'kn', 'kn', knVersion);
 
