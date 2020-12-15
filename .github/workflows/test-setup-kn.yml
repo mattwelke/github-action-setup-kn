@@ -1,8 +1,7 @@
 name: JS Actions
 
 on:
-  pull-request:
-    types: [labeled]
+  workflow_dispatch:
 
 jobs:
   test-happy-path:
