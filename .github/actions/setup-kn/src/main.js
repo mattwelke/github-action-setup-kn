@@ -1,4 +1,5 @@
-import { chmod } from 'fs/promises';
+const fsPromises = require('fs').promises;
+const chmod = fsPromises.chmod;
 
 import {
     addPath,

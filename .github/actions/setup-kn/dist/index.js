@@ -5083,23 +5083,18 @@ module.exports = v4;
 
 /***/ }),
 
-/***/ 909:
+/***/ 713:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-// ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
-
-// CONCATENATED MODULE: external "fs/promises"
-const promises_namespaceObject = require("fs/promises");;
-// EXTERNAL MODULE: ./node_modules/@actions/core/lib/core.js
-var core = __webpack_require__(186);
-// EXTERNAL MODULE: ./node_modules/@actions/tool-cache/lib/tool-cache.js
-var tool_cache = __webpack_require__(784);
-// EXTERNAL MODULE: ./node_modules/@lifeomic/attempt/src/index.js
-var src = __webpack_require__(449);
-// CONCATENATED MODULE: ./src/main.js
-
+/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(186);
+/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_actions_core__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _actions_tool_cache__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(784);
+/* harmony import */ var _actions_tool_cache__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_actions_tool_cache__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _lifeomic_attempt__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(449);
+const fsPromises = __webpack_require__(747).promises;
+const chmod = fsPromises.chmod;
 
 
 
@@ -5113,43 +5108,43 @@ var src = __webpack_require__(449);
 function isInstalled(version) {
     let toolPath;
     if (version) {
-        toolPath = (0,tool_cache.find)('kn', version);
+        toolPath = (0,_actions_tool_cache__WEBPACK_IMPORTED_MODULE_1__.find)('kn', version);
         return toolPath != undefined && toolPath !== '';
     } else {
-        toolPath = (0,tool_cache.findAllVersions)('kn');
+        toolPath = (0,_actions_tool_cache__WEBPACK_IMPORTED_MODULE_1__.findAllVersions)('kn');
         return toolPath.length > 0;
     }
 }
 
 async function run() {
-    const knVersion = (0,core.getInput)('version');
+    const knVersion = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('version');
 
     if (knVersion.length < 1 || knVersion[0] !== 'v') {
         throw new Error(`Invalid kn version ${knVersion} specified. Must start with "v".`);
     }
 
     if (isInstalled(knVersion)) {
-        (0,core.debug)(`kn ${knVersion} already installed. Skipping.`);
+        (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.debug)(`kn ${knVersion} already installed. Skipping.`);
         return;
     }
 
-    (0,core.debug)(`Downloading kn ${knVersion}.`);
+    (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.debug)(`Downloading kn ${knVersion}.`);
 
     const url = `https://github.com/knative/client/releases/download/${knVersion}/kn-linux-amd64`;
 
-    const downloadPath = await (0,src/* retry */.XD)(async () => (0,tool_cache.downloadTool)(url), {
+    const downloadPath = await (0,_lifeomic_attempt__WEBPACK_IMPORTED_MODULE_2__/* .retry */ .XD)(async () => (0,_actions_tool_cache__WEBPACK_IMPORTED_MODULE_1__.downloadTool)(url), {
         delay: 200,
         factor: 2,
         maxAttempts: 4,
     });
 
-    await (0,promises_namespaceObject.chmod)(downloadPath, '+x');
+    await chmod(downloadPath, '+x');
 
-    const toolDestFolder = await (0,tool_cache.cacheFile)(downloadPath, 'kn', 'kn', knVersion);
+    const toolDestFolder = await (0,_actions_tool_cache__WEBPACK_IMPORTED_MODULE_1__.cacheFile)(downloadPath, 'kn', 'kn', knVersion);
 
-    (0,core.addPath)(toolDestFolder);
+    (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.addPath)(toolDestFolder);
 
-    (0,core.debug)(`kn ${knVersion} installed.`);
+    (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.debug)(`kn ${knVersion} installed.`);
 }
 
 run();
@@ -5293,6 +5288,35 @@ module.exports = require("util");;
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => module['default'] :
+/******/ 				() => module;
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop)
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
@@ -5310,6 +5334,6 @@ module.exports = require("util");;
 /******/ 	// module exports must be returned from runtime so entry inlining is disabled
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(909);
+/******/ 	return __webpack_require__(713);
 /******/ })()
 ;
