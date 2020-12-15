@@ -5138,7 +5138,7 @@ async function run() {
         maxAttempts: 4,
     });
 
-    await chmod(downloadPath, '+x');
+    await chmod(downloadPath, '751');
 
     const toolDestFolder = await (0,_actions_tool_cache__WEBPACK_IMPORTED_MODULE_1__.cacheFile)(downloadPath, 'kn', 'kn', knVersion);
 
